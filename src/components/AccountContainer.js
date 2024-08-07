@@ -10,12 +10,20 @@ function AccountContainer() {
   let data =await res.json()
   setData(data)
  }
+ function searchData(searchform){
+  let filteredData =data.filter((trans)=>{
+    return trans.description.toLowerCase().includes(searchform.toLowerCase()) 
+  }
+  )
+ setData(filteredData)
+ }
+ 
  useEffect(()=>{
   fetchData()
  },[])
-  return (
+   return(
     <div>
-      <Search />
+      <Search searchData={searchData} />
       <AddTransactionForm />
       <TransactionsList  list={data}/>
     </div>
